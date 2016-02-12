@@ -1,8 +1,5 @@
-# Dynamic Groceries
-
-## About
-
-Personal CRUD app for creating and editing grocery lists. Designed as a mobile web application hosted at https://t-and-es-grocery-app.firebaseapp.com/.  
+# chepps
+Version 2.0 of a personal CRUD app for creating and editing grocery lists. Designed as a mobile web application hosted at https://t-and-es-grocery-app.firebaseapp.com/.  
 
 ## Frameworks, Libraries, Plugins, and Other Dependencies
 
@@ -18,5 +15,3 @@ See https://t-and-es-grocery-app.firebaseapp.com/ for a demo or clone the reposi
 ## Contact
 
 https://github.com/tombler/
-
-
