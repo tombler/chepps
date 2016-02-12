@@ -1,0 +1,10 @@
+{
+  "firebase": "t-and-es-grocery-app",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**",
+    "lib/bower_components/**/*.js"
+  ]
+}

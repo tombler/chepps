@@ -1,0 +1,45 @@
+.row-centered {
+  text-align: center; }
+
+.col-centered {
+  display: inline-block;
+  /* reset the text-align */
+  text-align: center;
+  /* inline-block space fix */
+  margin-right: -4px; }
+
+.col-centered button {
+  display: block;
+  margin: 50px auto;
+  min-width: 205px; }
+
+.container {
+  margin: 25px; }
+
+#listTitle {
+  width: 100%; }
+
+h4, h2 {
+  display: inline-block; }
+
+h4 {
+  float: right; }
+
+li.list-group-item {
+  width: 95%;
+  display: inline-block; }
+
+.import, .delete, .edit {
+  width: 100%;
+  text-align: center;
+  margin: 5px; }
+
+@media (max-width: 550px) {
+  li.list-group-item {
+    width: 85%;
+    display: inline-block; }
+
+  h4 {
+    display: inline-block; } }
+
+/*# sourceMappingURL=main.css.map */

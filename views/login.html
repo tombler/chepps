@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-1 col-md-4 col-centered"></div>
+    <div class="col-xs-10 col-md-4 col-centered">
+      <h1>Chepps</h1>
+      <p>A Grocery List App</p>
+    </div>
+    <div class="col-xs-1 col-md-4 col-centered"></div>
+  </div>
+  <div class="row row-centered">
+    <div class="col-xs-1 col-md-4"></div>
+    <div class="col-xs-10 col-md-4 col-centered">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="email"></span>
+          <input type="text" ng-model="username" class="form-control" placeholder="Email" aria-describedby="email" >
+        </div>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="password"></span>
+          <input type="password" ng-model="password" class="form-control" placeholder="Password" aria-describedby="password">
+        </div>
+        <button class="btn btn-primary" ng-click="login(username, password)">Log In</button>
+        <button class="btn" ng-click="signup()">Sign Up</button>
+    </div>
+    <div class="col-xs-1 col-md-4"></div>
+  </div>
+  <div class="row">
+    <div class="col-xs-1 col-md-4 col-centered"></div>
+    <div class="col-xs-10 col-md-4 col-centered">
+      <footer>&copy; 2015 Tom Griffey</footer>
+    </div>
+    <div class="col-xs-1 col-md-4 col-centered"></div>
+  </div>
+</div>
