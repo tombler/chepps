@@ -7,6 +7,14 @@ chepps.factory("Auth", ["$firebaseAuth",
   }
 ]);
 
+chepps.factory("Logout", function ($rootScope, Auth, $firebaseAuth, $location) {
+    $rootScope.auth = Auth;
+    return function () {
+        $rootScope.auth.$unauth();
+        $location.path('/login');
+    }
+});
+
 chepps.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider
@@ -18,5 +26,12 @@ chepps.config(['$routeProvider',
         templateUrl: '/views/home.html',
         controller: 'HomeCtrl'
       })
+      .when('/newlist', {
+        templateUrl: '/views/newlist.html',
+        controller: 'NewListCtrl'
+      })
+      .otherwise({
+        redirectTo: '/login'
+      });
   }
 ]);

@@ -1,5 +1,5 @@
-chepps.controller('HomeCtrl', function ($scope, Auth, $location) {
-
+chepps.controller('HomeCtrl', function ($scope, Auth, $location, Logout) {
+    
     // Redirect to login if authData is null
     $scope.auth = Auth;
     $scope.auth.$onAuth(function(authData) {
@@ -10,10 +10,8 @@ chepps.controller('HomeCtrl', function ($scope, Auth, $location) {
       }
     });
 
-    $scope.logout = function () {
-        $scope.auth.$unauth();
-        $location.path('/login');
-    }
+    // Add logout functionality to this $scope.
+    $scope.logout = Logout;
 
     $scope.title = "Dynamic Groceries";
 
