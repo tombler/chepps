@@ -14,7 +14,7 @@
 
               <div class="list-group">
                 <button type="button" class="btn btn-primary" ng-click="toggleImportConfirmation()">
-                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                  <span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
                 </button>
                 <button type="button" class="btn btn-danger" ng-click="toggleDeleteConfirmation()">
                   <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
@@ -25,7 +25,7 @@
                   <button type="button" class="btn btn-default" ng-click="toggleDeleteConfirmation()">Cancel</button>
                 </li>
                 <li class="list-group-item" ng-show="showImportConfirmation">
-                  Import to new list?
+                  Copy to new list?
                   <button type="button" class="btn btn-primary" ng-click="importList(list)">OK</button>
                   <button type="button" class="btn btn-default" ng-click="toggleImportConfirmation()">Cancel</button>
                 </li>

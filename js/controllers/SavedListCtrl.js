@@ -1,4 +1,4 @@
-chepps.controller('SavedListCtrl', function ($scope, Auth, $location, Logout, $firebaseArray, $firebaseObject) {
+chepps.controller('SavedListCtrl', function ($scope, Auth, $location, Logout, $firebaseArray, $firebaseObject, Import) {
     // Redirect to login if authData is null
     $scope.auth = Auth;
     $scope.auth.$onAuth(function(authData) {
@@ -82,6 +82,7 @@ chepps.controller('SavedListCtrl', function ($scope, Auth, $location, Logout, $f
       $scope.currentUserLists.$remove(list)
         .then(function (ref) {
           console.log("List deleted!");
+          $scope.toggleDeleteConfirmation();
         })
         .catch(function (err) {
           alert("error! Your list was not deleted");
@@ -89,7 +90,10 @@ chepps.controller('SavedListCtrl', function ($scope, Auth, $location, Logout, $f
     }
 
     $scope.importList = function (list) {
-      
+        // call Import factory, set temp list variable.
+        Import.setList("list_object", list);
+        // redirect to new list
+        $location.path('/newlist');
     }
    
 });

@@ -15,6 +15,24 @@ chepps.factory("Logout", function ($rootScope, Auth, $firebaseAuth, $location) {
     }
 });
 
+chepps.factory("Import", function () {
+  var storage = {};
+
+  return {
+      getList: function (list) {
+          if (storage.hasOwnProperty(list)) {
+              return storage[list];
+          }
+      },
+      setList: function (list, items) {
+          storage[list] = items;
+      },
+      emptyList: function () {
+        storage = {};
+      }
+  };
+});
+
 chepps.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider

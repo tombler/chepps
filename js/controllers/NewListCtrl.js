@@ -1,4 +1,4 @@
-chepps.controller('NewListCtrl', function ($scope, Auth, $location, Logout, $firebaseArray, $firebaseObject) {
+chepps.controller('NewListCtrl', function ($scope, Auth, $location, Logout, $firebaseArray, $firebaseObject, Import) {
     
 
     // Redirect to login if authData is null
@@ -17,17 +17,27 @@ chepps.controller('NewListCtrl', function ($scope, Auth, $location, Logout, $fir
     // get current user's lists in Firebase
     var authData = $scope.auth.$getAuth(); 
 
+    // Initial data for view before adding a new list
     $scope.newList = {
         heading: "Create A New List!",
         added: false,
         text: "",
-        date: ""
+        date: "",
+        showTitleForm: false
     }
 
-    $scope.createList = function (title) {
+    // Check if user is importing a list from our factory
+    if (Import.getList("list_object") !== undefined) {
+        //initialize new list for the DOM
+        $scope.currentList = {};
+        $scope.newList.added = true;
+        var today = new Date();
+        // get imported list
+        var importedList = Import.getList("list_object");
 
-        // Create a firebase ref for the new list
-        $scope.encodedTitle = encodeURI(title);
+        // Create new title from imported list's title and encode it
+        var title = importedList.title + " (copy)";
+        var encodedTitle = encodeURI(title);
         try {
             var newListUrl = "https://t-and-es-grocery-app.firebaseio.com/users/" + authData.uid + "/lists/" + $scope.encodedTitle;
             var ref = new Firebase(newListUrl);
@@ -37,13 +47,38 @@ chepps.controller('NewListCtrl', function ($scope, Auth, $location, Logout, $fir
            // Refresh page and put flash message here
         }
 
+        $scope.currentList.title = title;
+        $scope.currentList.dateCreated = (today.getMonth() + 1) + '/' + today.getDate() + '/' +  today.getFullYear();
+        $scope.currentList.items = importedList.items;
+
+        // Save the copied list.
+        $scope.currentList.$save().then(function() {
+          console.log("New list saved!");
+        }, function(error) {
+          console.log("Error:", error);
+        });
+    }
+
+    $scope.createList = function (title) {
+
+        // Create a firebase ref for the new list
+        var encodedTitle = encodeURI(title);
+        console.log(encodedTitle)
+        try {
+            var newListUrl = "https://t-and-es-grocery-app.firebaseio.com/users/" + authData.uid + "/lists/" + encodedTitle;
+            var ref = new Firebase(newListUrl);
+            $scope.currentList = $firebaseObject(ref);
+        } catch (e) {
+           alert("error! can't use those characters in a title");
+           // Refresh page and put flash message here
+        }
+
         $scope.newList.added = true;
         var today = new Date();
-        $scope.newList.date = (today.getMonth() + 1) + '/' + today.getDate() + '/' +  today.getFullYear();
 
         // Add properties to the new list
         $scope.currentList.title = title;
-        $scope.currentList.dateCreated = $scope.newList.date;
+        $scope.currentList.dateCreated = (today.getMonth() + 1) + '/' + today.getDate() + '/' +  today.getFullYear();
         $scope.currentList.items = [];
 
         // Save the new list.
@@ -55,6 +90,16 @@ chepps.controller('NewListCtrl', function ($scope, Auth, $location, Logout, $fir
         
     };
 
+    $scope.editTitle = function() {
+        $scope.newList.showTitleForm = !$scope.newList.showTitleForm;
+        $scope.currentList.$save().then(function() {
+          console.log("Title saved!");
+          // Put flash message here
+        }, function(error) {
+          console.log("Error:", error);
+          // Put flash message here
+        });
+    };
 
     $scope.addItemToList = function (item) {
         var newItem = {
@@ -90,8 +135,15 @@ chepps.controller('NewListCtrl', function ($scope, Auth, $location, Logout, $fir
         }, function(error) {
           console.log("Error:", error);
           // Put flash message here
-        });
-        
+        });  
     };
+
+    $scope.clearNewList = function() {
+        // clear new list object
+        $scope.currentList == {};
+        // Empty factory
+        Import.emptyList();
+
+    }
 
 });

@@ -12,10 +12,25 @@
           <button type="button" class="btn btn-default btn-primary" ng-click="createList(newList.text)">Add Title</button>
         </div>
         <div ng-show="newList.added">
-          <h2>{{newList.text}}</h2>
-          <p>Created on {{newList.date}}</p>
+          <div ng-show="!newList.showTitleForm">
+            <h2>{{currentList.title}}</h2>
+            <button type="button" class="btn btn-primary" ng-click="editTitle()">
+              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>`
+            </button>
+          </div>
+          
+          <form class="form-inline" ng-show="newList.showTitleForm">       
+            <div class="form-group">`
+              <label for="title">Title</label>
+              <input type="text" class="form-control input-lg" ng-model="currentList.title">
+              <button type="button" class="btn btn-primary" ng-click="editTitle()">
+                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+              </button>
+            </div>
+          </form>
+
+          <p>Created on {{currentList.dateCreated}}</p>
         </div>
-        <button class="btn btn-default btn-primary" ng-click="viewSavedLists()">Import From Saved Lists</button>
 
       </section>
 
@@ -62,7 +77,7 @@
   <div class="row">
     <div class="col-xs-1 col-md-4 col-centered"></div>
     <div class="col-xs-10 col-md-4 col-centered">
-      <a href="#/home">Home</a> | <a href="#/savedlists">Saved Lists</a>
+      <a href="#/home" ng-click="clearNewList()">Home</a> | <a href="#/savedlists" ng-click="clearNewList()">Saved Lists</a>
     </div>
     <div class="col-xs-1 col-md-4 col-centered"></div>
   </div>
