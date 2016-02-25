@@ -16,9 +16,6 @@ chepps.controller('NewListCtrl', function ($scope, Auth, $location, Logout, $fir
 
     // get current user's lists in Firebase
     var authData = $scope.auth.$getAuth(); 
-    // var listsUrl = "https://t-and-es-grocery-app.firebaseio.com/users/" + authData.uid + "/lists/";
-    // var ref = new Firebase(listsUrl);
-    // $scope.userLists = $firebaseArray(ref);
 
     $scope.newList = {
         heading: "Create A New List!",
@@ -60,7 +57,6 @@ chepps.controller('NewListCtrl', function ($scope, Auth, $location, Logout, $fir
 
 
     $scope.addItemToList = function (item) {
-
         var newItem = {
             name: item,
             price: 0,
@@ -83,5 +79,19 @@ chepps.controller('NewListCtrl', function ($scope, Auth, $location, Logout, $fir
         // After adding, reset input to empty
         $scope.item="";
     }
+
+    $scope.removeItem = function (item) {
+
+        var index = $scope.currentList.items.indexOf(item);
+        $scope.currentList.items.splice(index, 1);
+        $scope.currentList.$save().then(function() {
+          console.log("item deleted!");
+          // Put flash message here
+        }, function(error) {
+          console.log("Error:", error);
+          // Put flash message here
+        });
+        
+    };
 
 });

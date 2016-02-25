@@ -30,6 +30,10 @@ chepps.config(['$routeProvider',
         templateUrl: '/views/newlist.html',
         controller: 'NewListCtrl'
       })
+      .when('/savedlists', {
+        templateUrl: '/views/savedlist.html',
+        controller: 'SavedListCtrl'
+      })
       .otherwise({
         redirectTo: '/login'
       });

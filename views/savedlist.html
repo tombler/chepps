@@ -1,0 +1,77 @@
+<div class="container">
+    
+    <div class="row">
+      <div class="col-xs-1 col-md-4"></div>
+      <div class="col-xs-10 col-md-4">
+
+
+        <div class="panel-group" id="currentUserLists">
+          <div class="panel panel-default" ng-repeat="list in currentUserLists">
+            <div class="panel-heading accordion-toggle panel-title collapsed" data-toggle="collapse" data-parent="#currentUserLists" data-target="#{{list.unique}}" aria-expanded="false">
+              <h4>{{list.title}}</h4>
+            </div>
+            <div class="panel-collapse collapse" id="{{list.unique}}">
+
+              <div class="list-group">
+                <button type="button" class="btn btn-primary" ng-click="toggleImportConfirmation()">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-danger" ng-click="toggleDeleteConfirmation()">
+                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
+                <li class="list-group-item" ng-show="showDeleteConfirmation">
+                  Remove this list?
+                  <button type="button" class="btn btn-primary" ng-click="deleteList(list)">OK</button>
+                  <button type="button" class="btn btn-default" ng-click="toggleDeleteConfirmation()">Cancel</button>
+                </li>
+                <li class="list-group-item" ng-show="showImportConfirmation">
+                  Import to new list?
+                  <button type="button" class="btn btn-primary" ng-click="importList(list)">OK</button>
+                  <button type="button" class="btn btn-default" ng-click="toggleImportConfirmation()">Cancel</button>
+                </li>
+
+
+                <li class="list-group-item" ng-repeat="item in list.items">
+                  <button type="button" class="btn btn-default" ng-click="removeItem(item, list)">
+                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                  </button>
+                  <span class="badge">{{item.price}}</span>{{item.name}}
+                </li>
+                <form class="form-inline">       
+                  <div class="form-group">
+                    <label class="sr-only" for="item">Item</label>
+                    <input type="text" class="form-control" placeholder="Item" ng-model="item.name">
+                    <button type="button" class="btn btn-default" ng-click="addItem(item.name, list)">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div> <!-- end each panel -->
+
+        </div> <!-- end panel group -->
+      </div>
+      <div class="col-xs-1 col-md-4"></div>
+      
+    </div>
+
+
+  
+
+  
+
+  <div class="row">
+    <div class="col-xs-1 col-md-4 col-centered"></div>
+    <div class="col-xs-10 col-md-4 col-centered">
+      <a href="#/home">Home</a> | <a href="#/newlist">New List</a>
+    </div>
+    <div class="col-xs-1 col-md-4 col-centered"></div>
+  </div>
+
+  <div ng-include="'views/partials/logout.html'"></div>
+
+
+</div> <!-- end container -->
+

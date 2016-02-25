@@ -1,1 +1,3 @@
 lib/
+*.map
+.sass-cache
